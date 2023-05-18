@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/ui/BaseButton/BaseButton.dart';
 import 'package:flutter_application_1/ui/BaseTextFiled/BaseTextField.dart';
 import 'package:flutter_application_1/utils/func.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../utils/route-utils.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -15,6 +18,10 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    void directRegisterScreen() {
+      context.push(AppPage.register.toPath);
+    }
+
     return Scaffold(
         body: SafeArea(
             child: Padding(
@@ -25,16 +32,16 @@ class _LoginState extends State<Login> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              // SizedBox(
-              //   width: double.infinity,
-              //   child: Center(
-              //     child: FractionallySizedBox(
-              //       widthFactor: 0.5,
-              //       child: Image.asset('assets/images/logos/logo.png'),
-              //     ),
-              //   ),
-              // ),
-              // const SizedBox(height: 40),
+              SizedBox(
+                width: double.infinity,
+                child: Center(
+                  child: FractionallySizedBox(
+                    widthFactor: 0.5,
+                    child: Image.asset('assets/images/logos/logo.png'),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 40),
               const Text(
                 'Login',
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -96,14 +103,12 @@ class _LoginState extends State<Login> {
                       height: 1,
                     ),
                   ),
-                  Container(
-                    child: Text(
-                      'OR',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: hexToColor('#727D90'),
-                          fontSize: 18),
-                    ),
+                  Text(
+                    'OR',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: hexToColor('#727D90'),
+                        fontSize: 18),
                   ),
                   Expanded(
                     child: Container(
@@ -142,12 +147,15 @@ class _LoginState extends State<Login> {
                 children: [
                   const Text('Create a new account ?'),
                   const SizedBox(width: 5),
-                  Text(
-                    'Register',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: hexToColor('#2368f6')),
-                  ),
+                  InkWell(
+                    onTap: directRegisterScreen,
+                    child: Text(
+                      'Register',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: hexToColor('#2368f6')),
+                    ),
+                  )
                 ],
               )
             ],
