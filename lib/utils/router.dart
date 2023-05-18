@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/models/auth.dart';
+import 'package:flutter_application_1/screen/auth/forgot-password/ForgotPassword.dart';
 import 'package:flutter_application_1/screen/auth/login/login.dart';
 import 'package:flutter_application_1/screen/auth/register/register.dart';
 import 'package:flutter_application_1/screen/settings/settings.dart';
@@ -58,6 +59,11 @@ class AppRouter {
         name: AppPage.register.toName,
         path: AppPage.register.toPath,
         builder: (context, state) => const Register(),
+      ),
+      GoRoute(
+        name: AppPage.forgotPassword.toName,
+        path: AppPage.forgotPassword.toPath,
+        builder: (context, state) => const ForgotPassword(),
       ),
     ],
     redirect: (context, state) {
