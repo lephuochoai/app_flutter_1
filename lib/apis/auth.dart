@@ -16,4 +16,17 @@ class AuthApis {
       return ResponseApi(false, jsonResponse);
     }
   }
+
+  static Future<ResponseApi> register(String email, String password) async {
+    final response = await http.post(getUri('/auth/register'),
+        body: {'email': email, 'password': password});
+    var jsonResponse =
+        convert.jsonDecode(response.body) as Map<String, dynamic>;
+
+    if (response.statusCode == 200) {
+      return ResponseApi(true, jsonResponse);
+    } else {
+      return ResponseApi(false, jsonResponse);
+    }
+  }
 }
