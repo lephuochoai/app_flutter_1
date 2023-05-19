@@ -35,11 +35,16 @@ class _RegisterState extends State<Register> {
     void onSubmit() async {
       if (formKey.currentState!.validate()) {
         formKey.currentState!.save();
-        // toggleLoading();
+        toggleLoading();
         final response = await AuthApis.register(email, password);
 
-        if (response == true) {
-          print(response);
+        if (response.success == true) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Registered successfully'),
+            ),
+          );
+          goBack();
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -48,7 +53,7 @@ class _RegisterState extends State<Register> {
           );
         }
 
-        // toggleLoading();
+        toggleLoading();
       }
     }
 
