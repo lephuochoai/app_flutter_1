@@ -20,6 +20,8 @@ class AuthApis {
   static Future<ResponseApi> register(String email, String password) async {
     final response = await http.post(getUri('/auth/register'),
         body: {'email': email, 'password': password});
+    print(response.body);
+
     var jsonResponse =
         convert.jsonDecode(response.body) as Map<String, dynamic>;
 

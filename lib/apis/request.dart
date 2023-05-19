@@ -1,7 +1,7 @@
 const apiUrl = 'localhost:8080';
 
 Uri getUri(path) {
-  return Uri.https(apiUrl, path);
+  return Uri.http(apiUrl, path);
 }
 
 class ResponseApi {

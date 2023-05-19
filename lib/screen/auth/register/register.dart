@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screen/auth/register/register.validator.dart';
 
 import '../../../apis/auth.dart';
 import '../../../ui/BaseButton/BaseButton.dart';
 import '../../../ui/BaseTextFiled/BaseTextField.dart';
 import '../../../utils/func.dart';
+import 'register.validator.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -35,10 +35,10 @@ class _RegisterState extends State<Register> {
     void onSubmit() async {
       if (formKey.currentState!.validate()) {
         formKey.currentState!.save();
-        toggleLoading();
+        // toggleLoading();
         final response = await AuthApis.register(email, password);
 
-        if (response.success == true) {
+        if (response == true) {
           print(response);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -48,7 +48,7 @@ class _RegisterState extends State<Register> {
           );
         }
 
-        toggleLoading();
+        // toggleLoading();
       }
     }
 
@@ -71,16 +71,16 @@ class _RegisterState extends State<Register> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: Center(
-                        child: FractionallySizedBox(
-                          widthFactor: 0.5,
-                          child: Image.asset('assets/images/logos/logo.png'),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 40),
+                    // SizedBox(
+                    //   width: double.infinity,
+                    //   child: Center(
+                    //     child: FractionallySizedBox(
+                    //       widthFactor: 0.5,
+                    //       child: Image.asset('assets/images/logos/logo.png'),
+                    //     ),
+                    //   ),
+                    // ),
+                    // const SizedBox(height: 40),
                     const Text(
                       'Sign up',
                       style:
@@ -104,6 +104,7 @@ class _RegisterState extends State<Register> {
                     BaseTextField(
                       hint: 'Password',
                       prefixIcon: const Icon(Icons.lock),
+                      obscureText: isPassShow,
                       suffixIcon: GestureDetector(
                         onTap: () {
                           setState(() {
@@ -145,7 +146,8 @@ class _RegisterState extends State<Register> {
                       width: double.infinity,
                       height: 50,
                       child: BaseButton(
-                          onPressed: () {},
+                          loading: loading,
+                          onPressed: onSubmit,
                           child: const Text(
                             'Continue',
                             style: TextStyle(

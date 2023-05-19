@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/models/auth.dart';
-import 'package:flutter_application_1/screen/auth/forgot-password/ForgotPassword.dart';
-import 'package:flutter_application_1/screen/auth/login/login.dart';
-import 'package:flutter_application_1/screen/auth/register/register.dart';
-import 'package:flutter_application_1/screen/settings/settings.dart';
-import 'package:flutter_application_1/screen/splash/splash.dart';
+
 import 'package:go_router/go_router.dart';
 
+import '../models/auth.dart';
 import '../models/index.dart';
+import '../screen/auth/forgot-password/ForgotPassword.dart';
+import '../screen/auth/login/login.dart';
+import '../screen/auth/register/register.dart';
 import '../screen/main/main.dart';
+import '../screen/settings/settings.dart';
+import '../screen/splash/splash.dart';
 import 'route-utils.dart';
 
 class AppRouter {

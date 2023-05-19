@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/models/auth.dart';
-import 'package:flutter_application_1/models/index.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'models/auth.dart';
+import 'models/index.dart';
 import 'utils/router.dart';
 
 void main() async {

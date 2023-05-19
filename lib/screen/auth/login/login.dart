@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/ui/BaseButton/BaseButton.dart';
-import 'package:flutter_application_1/ui/BaseTextFiled/BaseTextField.dart';
-import 'package:flutter_application_1/utils/func.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../apis/auth.dart';
+import '../../../ui/BaseButton/BaseButton.dart';
+import '../../../ui/BaseTextFiled/BaseTextField.dart';
+import '../../../utils/func.dart';
 import '../../../utils/route-utils.dart';
 import 'login.validator.dart';
 
