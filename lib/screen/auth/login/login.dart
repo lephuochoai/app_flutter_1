@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/auth.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../../../apis/auth.dart';
 import '../../../ui/BaseButton/BaseButton.dart';
@@ -16,14 +18,11 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  bool isPassShow = true;
-  String username = '';
+  bool isPassShow = false;
+  String email = '';
   String password = '';
   bool loading = false;
   final formKey = GlobalKey<FormState>();
-
-  // username: 'kminchelle',
-  // password: '0lelplR',
 
   void toggleLoading() {
     setState(() {
@@ -33,6 +32,8 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    final authState = Provider.of<AuthState>(context);
+
     void directRegisterScreen() {
       context.push(AppPage.register.toPath);
     }
@@ -41,18 +42,25 @@ class _LoginState extends State<Login> {
       context.push(AppPage.forgotPassword.toPath);
     }
 
-    void onSubmit() async {
+    void onSubmitForm() async {
       if (formKey.currentState!.validate()) {
         formKey.currentState!.save();
         toggleLoading();
-        final response = await AuthApis.login(username, password);
+        final result = await AuthApis.login(email, password);
 
-        if (response.success == true) {
-          print(response);
+        if (result.success == true) {
+          String token = result.data['token'];
+          String refreshToken = result.data['refreshToken'];
+          authState.login(token: token, refreshToken: refreshToken);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Login successfully'),
+            ),
+          );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(response.data['message']),
+              content: Text(result.data['message']),
             ),
           );
         }
@@ -65,21 +73,21 @@ class _LoginState extends State<Login> {
         body: SafeArea(
             child: Padding(
                 padding: const EdgeInsets.all(24),
-                child: Center(
-                  child: Form(
+                child: Form(
+                  key: formKey,
+                  child: Center(
                     child: SingleChildScrollView(
-                      key: formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Center(
-                            child: SizedBox(
-                              width: 200,
-                              height: 200,
-                              child:
-                                  Image.asset('assets/images/logos/logo.png'),
-                            ),
-                          ),
+                          // Center(
+                          //   child: SizedBox(
+                          //     width: 200,
+                          //     height: 200,
+                          //     child:
+                          //         Image.asset('assets/images/logos/logo.png'),
+                          //   ),
+                          // ),
                           const SizedBox(height: 40),
                           const Text(
                             'Login',
@@ -88,12 +96,12 @@ class _LoginState extends State<Login> {
                           ),
                           const SizedBox(height: 40),
                           BaseTextField(
-                            hint: 'Username',
-                            prefixIcon: const Icon(Icons.person_2),
+                            hint: 'Email',
+                            prefixIcon: const Icon(Icons.email),
                             onSaved: (value) {
-                              if (value != null) username = value;
+                              if (value != null) email = value.trim();
                             },
-                            validator: usernameValidator,
+                            validator: emailValidator,
                           ),
                           const SizedBox(height: 20),
                           BaseTextField(
@@ -120,7 +128,7 @@ class _LoginState extends State<Login> {
                           const SizedBox(height: 20),
                           Container(
                             alignment: Alignment.centerRight,
-                            child: InkWell(
+                            child: GestureDetector(
                               onTap: directForgotPasswordScreen,
                               child: Text(
                                 'Forgot Password',
@@ -137,7 +145,7 @@ class _LoginState extends State<Login> {
                             height: 50,
                             child: BaseButton(
                               loading: loading,
-                              onPressed: onSubmit,
+                              onPressed: onSubmitForm,
                               child: const Text(
                                 'Login',
                                 style: TextStyle(
@@ -201,7 +209,7 @@ class _LoginState extends State<Login> {
                             children: [
                               const Text('Create a new account ?'),
                               const SizedBox(width: 5),
-                              InkWell(
+                              GestureDetector(
                                 onTap: directRegisterScreen,
                                 child: Text(
                                   'Register',

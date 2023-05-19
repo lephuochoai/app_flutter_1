@@ -4,15 +4,17 @@ import 'package:http/http.dart' as http;
 import 'request.dart';
 
 class AuthApis {
-  static Future<ResponseApi> login(String username, String password) async {
+  static Future<ResponseApi> login(String email, String password) async {
     final response = await http.post(getUri('/auth/login'),
-        body: {'username': username, 'password': password});
-    var jsonResponse = jsonDecode(response.body);
+        body: {'email': email, 'password': password});
+    var res = jsonDecode(response.body);
+
+    print(res);
 
     if (response.statusCode == 200) {
-      return ResponseApi(true, jsonResponse);
+      return ResponseApi(true, res);
     } else {
-      return ResponseApi(false, jsonResponse);
+      return ResponseApi(false, res);
     }
   }
 

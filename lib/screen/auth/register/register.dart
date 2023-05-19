@@ -14,7 +14,7 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  bool isPassShow = true;
+  bool isPassShow = false;
   String email = '';
   String password = '';
   bool loading = false;
@@ -89,20 +89,15 @@ class _RegisterState extends State<Register> {
                           hint: 'Email',
                           prefixIcon: const Icon(Icons.email),
                           onSaved: (value) {
-                            if (value != null) email = value;
+                            if (value != null) email = value.trim();
                           },
                           validator: emailValidator,
                         ),
                         const SizedBox(height: 20),
-                        // const BaseTextField(
-                        //   hint: 'Username',
-                        //   prefixIcon: Icon(Icons.person_2),
-                        // ),
-                        const SizedBox(height: 20),
                         BaseTextField(
                           hint: 'Password',
                           prefixIcon: const Icon(Icons.lock),
-                          obscureText: isPassShow,
+                          obscureText: !isPassShow,
                           suffixIcon: GestureDetector(
                             onTap: () {
                               setState(() {

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
-String? usernameValidator(String? value) {
-  if (value == null || value.isEmpty) return 'Please enter the username';
+String? emailValidator(String? value) {
+  if (value == null || value.isEmpty) return 'Please enter the email';
+
+  if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+    return 'Please enter a valid email';
+  }
 
   return null;
 }
