@@ -23,13 +23,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider<AuthState>(
-              create: (_) => AuthState(), lazy: false),
-          ChangeNotifierProvider<AppState>(
-              create: (_) => AppState(), lazy: false),
-        ],
-        child: Builder(builder: (context) {
+      providers: [
+        ChangeNotifierProvider<AuthState>(
+            create: (_) => AuthState(), lazy: false),
+        ChangeNotifierProvider<AppState>(
+            create: (_) => AppState(), lazy: false),
+      ],
+      child: Builder(
+        builder: (context) {
           final appState = context.watch<AppState>();
           final authState = context.watch<AuthState>();
           final AppRouter appRouter =
@@ -57,6 +58,8 @@ class MyApp extends StatelessWidget {
             // routeInformationParser: goRouter.routeInformationParser,
             // routerDelegate: goRouter.routerDelegate,
           );
-        }));
+        },
+      ),
+    );
   }
 }

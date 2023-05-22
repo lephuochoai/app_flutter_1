@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/func.dart';
+import 'NavBarIcon.dart';
+
 // enum BottomTabs { home, settings }
 
 class BottomNavBar extends StatelessWidget {
@@ -10,20 +13,69 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          label: 'Settings',
-        ),
-      ],
-      selectedItemColor: Colors.amber[800],
-      currentIndex: selectedTab,
-      onTap: onTabNavBar,
+    return Theme(
+      data: ThemeData(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+      ),
+      child: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: NavBarIcon(
+              isActive: false,
+              iconPath: 'assets/images/icons/home.svg',
+            ),
+            label: 'Home',
+            activeIcon: NavBarIcon(
+              isActive: true,
+              iconPath: 'assets/images/icons/home.svg',
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: NavBarIcon(
+              isActive: false,
+              iconPath: 'assets/images/icons/search.svg',
+            ),
+            label: 'Search',
+            activeIcon: NavBarIcon(
+              isActive: true,
+              iconPath: 'assets/images/icons/search.svg',
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: NavBarIcon(
+              isActive: false,
+              iconPath: 'assets/images/icons/bookmark.svg',
+            ),
+            label: 'Save',
+            activeIcon: NavBarIcon(
+              isActive: true,
+              iconPath: 'assets/images/icons/bookmark.svg',
+            ),
+          ),
+          BottomNavigationBarItem(
+            icon: NavBarIcon(
+              isActive: false,
+              iconPath: 'assets/images/icons/settings.svg',
+            ),
+            label: 'Settings',
+            activeIcon: NavBarIcon(
+              isActive: true,
+              iconPath: 'assets/images/icons/settings.svg',
+            ),
+          ),
+        ],
+        selectedItemColor: hexToColor('#1DAEFF'),
+        unselectedItemColor: hexToColor('#67686D'),
+        backgroundColor: hexToColor('#0C0C24'),
+        currentIndex: selectedTab,
+        onTap: onTabNavBar,
+        selectedFontSize: 12,
+        showSelectedLabels: true,
+        showUnselectedLabels: false,
+        type: BottomNavigationBarType.fixed,
+        // selectedLabelStyle: const TextStyle(fontSize: 12),
+      ),
     );
   }
 }

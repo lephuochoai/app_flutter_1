@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/models/auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../apis/auth.dart';
+import '../../../models/auth.dart';
 import '../../../ui/BaseButton/BaseButton.dart';
 import '../../../ui/BaseTextFiled/BaseTextField.dart';
 import '../../../utils/func.dart';
@@ -80,14 +80,14 @@ class _LoginState extends State<Login> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Center(
-                          //   child: SizedBox(
-                          //     width: 200,
-                          //     height: 200,
-                          //     child:
-                          //         Image.asset('assets/images/logos/logo.png'),
-                          //   ),
-                          // ),
+                          Center(
+                            child: SizedBox(
+                              width: 200,
+                              height: 200,
+                              child:
+                                  Image.asset('assets/images/logos/logo.png'),
+                            ),
+                          ),
                           const SizedBox(height: 40),
                           const Text(
                             'Login',
